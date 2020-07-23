@@ -21,7 +21,7 @@ exports.saveGroup = function (req, res) {
 };
 
 exports.getGroups = function (req, res) {
-    const params = { owner: req.query.owner };
+    const params = { repondents: req.query.owner };
     Group.find(params, function (err, response) {
         if (err) {
             utils.errorController(res, 500, err);

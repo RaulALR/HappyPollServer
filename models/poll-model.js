@@ -11,6 +11,11 @@ var PollSchema = new mongoose.Schema({
         unique: false,
         required: true,
     },
+    owner: {
+        type: String,
+        unique: false,
+        required: true,
+    },
     questions: {
         type: Array,
         unique: false,

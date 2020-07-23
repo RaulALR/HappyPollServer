@@ -26,7 +26,6 @@ exports.getGroups = function (req, res) {
         if (err) {
             utils.errorController(res, 500, err);
         } else if (!response) {
-            console.log('401')
             utils.errorController(res, 401, "Not exist");
         } else {
             res.json({
@@ -43,7 +42,6 @@ exports.getGroup = function (req, res) {
             if (err) {
                 utils.errorController(res, 500, err);
             } else if (!response) {
-                console.log('401')
                 utils.errorController(res, 401, "Not exist");
             } else {
                 res.json({

@@ -19,7 +19,6 @@ exports.login = function (req, res) {
                     else
                         loginStatus = result;
 
-                    console.log(response);
                     console.log(jwtService.createToken(response));
                     res.json({
                         message: `User login ${loginStatus ? 'successfully' : 'fails'}`,
@@ -29,3 +28,19 @@ exports.login = function (req, res) {
             } { }
         });
 }
+
+exports.getUsers = function (req, res) {
+    const expReg = new RegExp(req.query.search);
+    User.find({ email: expReg }, function (err, response) {
+        if (err) {
+            utils.errorController(res, 500, err);
+        } else if (!response) {
+            utils.errorController(res, 401, "Not exist");
+        } else {
+            res.status(200).send({
+                message: 'User list succesffuly',
+                data: response
+            });
+        }
+    });
+};

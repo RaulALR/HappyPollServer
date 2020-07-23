@@ -9,6 +9,7 @@ exports.savePoll = function (req, res) {
     poll.pollName = req.body.pollName || null;
     poll.groupPoll = req.body.groupPoll || null;
     poll.questions = req.body.questions || null;
+    poll.owner = req.body.owner || null;
 
     poll.save(function (err) {
         if (err)
@@ -22,12 +23,11 @@ exports.savePoll = function (req, res) {
 };
 
 exports.getPolls = function (req, res) {
-    const params = { owner: req.query.user };
+    const params = { repondents: req.query.user };
     Group.find(params, function (err, response) {
         if (err) {
             utils.errorController(res, 500, err);
         } else if (!response) {
-            console.log('401')
             utils.errorController(res, 401, "Not exist");
         } else {
             let pollsArray = [];
@@ -59,7 +59,6 @@ exports.getPoll = function (req, res) {
             if (err) {
                 utils.errorController(res, 500, err);
             } else if (!response) {
-                console.log('401')
                 utils.errorController(res, 401, "Not exist");
             } else {
                 res.json({

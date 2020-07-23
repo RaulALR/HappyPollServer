@@ -41,6 +41,10 @@ var loginController = require('../controllers/login-controller');
 router.route('/login')
     .post(loginController.login);
 
+//Users router
+router.route('/users')
+    .get(loginController.getUsers);
+
 //Register user router
 var registerUserController = require('../controllers/register-user-controller');
 router.route('/register')

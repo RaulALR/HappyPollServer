@@ -20,7 +20,19 @@ var PollSchema = new mongoose.Schema({
         type: Array,
         unique: false,
         required: true
-    }
+    },
+    answers: new mongoose.Schema(({
+        user: {
+            type: String,
+            unique: true,
+            required: false
+        },
+        answersData: {
+            type: Array,
+            unique: false,
+            required: false
+        }
+    }))
 });
 
 var Poll = mongoose.model('Polls', PollSchema);

@@ -76,6 +76,22 @@ exports.updatePolls = function (req, res) {
         poll.pollName = req.body.params.pollName || null;
         poll.groupPoll = req.body.params.groupPoll || null;
         poll.questions = req.body.params.questions || null;
+        if (req.body.params.answer) {
+            if (poll.answers) {
+                poll.answers.forEach((item, index) => {
+                    if (item.user = req.body.params.answer.user) {
+                        position = index;
+                    }
+                })
+                if (position) {
+                    poll.answers[position] = req.body.params.answer;
+                } else {
+                    poll.answers.push(req.body.params.answer);
+                }
+            } else {
+                poll.answers = req.body.params.answer || null;
+            }
+        }
         poll.save(function (err) {
             if (err)
                 utils.errorController(res, 500, err);

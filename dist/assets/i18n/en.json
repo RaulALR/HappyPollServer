@@ -1,0 +1,77 @@
+{
+    "commons": {
+        "create": "Create",
+        "update": "Update",
+        "save": "Save",
+        "delete": "Delete",
+        "select": "Select",
+        "cancel": "Cancel",
+        "send": "Send"
+    },
+    "principal": {
+        "principalTitle": "Principal menu",
+        "createPolls": "Create poll",
+        "showPolls": "Show polls",
+        "createGroup": "Create group",
+        "viewGroups": "Ver mis grupos"
+    },
+    "settings": {
+        "languages": "Lenguages",
+        "english": "English",
+        "spanish": "Spanish",
+        "closeSessionToast": "Session closed",
+        "settingsTitle": "Settings",
+        "selectLenguage": "Select language",
+        "disconnect": "Disconnect"
+    },
+    "login-register": {
+        "already": "Already a user?",
+        "or": "or",
+        "register": "Register",
+        "signIn": "Sign in"
+    },
+    "login": {
+        "email": "Email",
+        "password": "Password",
+        "title": "Log in",
+        "signIn": "Sign in",
+        "forgotPassword": "Forgot password?",
+        "userSignIn": "Login successfuly"
+    },
+    "register": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "password": "Password",
+        "signUp": "Sing up",
+        "title": "Sing up",
+        "userSignUp": "Successful registered user",
+        "repeatPassword": "Repeat password"
+    },
+    "createPoll": {
+        "title": "Create polls",
+        "questions": "Questions",
+        "pollName": "Poll name",
+        "create": "Create",
+        "groupPoll": "Group",
+        "pollCreated": "Poll created",
+        "titleUpdate": "Update poll",
+        "pollUpdated": "Poll updated"
+    },
+    "viewPoll": {
+        "title": "View poll list",
+        "pollDeleted": "Poll deleted",
+        "doPoll": "Poll"
+    },
+    "group": {
+        "owner": "Owner",
+        "repondents": "Repondents",
+        "title": "Create group",
+        "groupName": "Group name",
+        "groupCreated": "Group created",
+        "titleView": "View groups",
+        "groupUpdated": "Group updated",
+        "titleUpdate": "Update group",
+        "groupDeleted": "Group deleted"
+    }
+}

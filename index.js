@@ -8,7 +8,7 @@ const app = express();
 const apiRoutes = require("./routes/api-routes");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-mongoose.connect(config.db, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI ? process.env.MONGODB_URI : config.db, { useNewUrlParser: true, useUnifiedTopology: true });
 
 var db = mongoose.connection;
 
@@ -19,7 +19,12 @@ else
 
 var port = process.env.PORT || 8080;
 app.use(cors());
-app.get('/', (req, res) => res.send('Hello World with Express'));
+// app.get('/', (req, res) => res.send('Hello World with Express'));
+
+app.use(express.static(__dirname + '/dist'));
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname + '/dist/index.html'));
+});
 
 app.use('/api', apiRoutes);
 // app.use((req, res, next) => {

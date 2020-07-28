@@ -32,9 +32,6 @@ app.get('/', function (req, res) {
     })
 });
 
-app.listen(port);
-console.log('Listening on port ' + port);
-
 // app.get('/', (req, res) => res.send('Hello World with Express'));
 
 // app.use(express.static(__dirname + '/dist'));

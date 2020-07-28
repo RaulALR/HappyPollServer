@@ -19,12 +19,30 @@ else
 
 var port = process.env.PORT || 8080;
 app.use(cors());
+
+const root = path.join(__dirname, 'dist');
+
+app.get('/', function (req, res) {
+    fs.stat(root + req.path, function (err) {
+        if (err) {
+            res.sendFile("index.html", { root });
+        } else {
+            res.sendFile(req.path, { root });
+        }
+    })
+});
+
+app.listen(port);
+console.log('Listening on port ' + port);
+
 // app.get('/', (req, res) => res.send('Hello World with Express'));
 
-app.use(express.static(__dirname + '/dist'));
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/dist/index.html'));
-});
+// app.use(express.static(__dirname + '/dist'));
+// app.get('/', function (req, res) {
+//     res.sendFile(path.join(__dirname + '/dist/index.html'));
+// });
+// app.set('views', __dirname);
+// app.set('view engine', 'html');
 
 app.use('/api', apiRoutes);
 // app.use((req, res, next) => {

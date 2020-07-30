@@ -1,6 +1,7 @@
 'use strict'
 const Poll = require('../models/poll-model');
 const Group = require('../models/group-model');
+const Historic = require('../models/historic-model');
 const utils = require('../shared/utils');
 
 exports.savePoll = function (req, res) {
@@ -10,6 +11,7 @@ exports.savePoll = function (req, res) {
     poll.groupPoll = req.body.groupPoll || null;
     poll.questions = req.body.questions || null;
     poll.owner = req.body.owner || null;
+    poll.openDate = new Date();
 
     poll.save(function (err) {
         if (err)
@@ -76,20 +78,20 @@ exports.updatePolls = function (req, res) {
         poll.pollName = req.body.params.pollName || null;
         poll.groupPoll = req.body.params.groupPoll || null;
         poll.questions = req.body.params.questions || null;
-        if (req.body.params.answer) {
+        if (req.body.params.answers) {
             if (poll.answers) {
                 poll.answers.forEach((item, index) => {
-                    if (item.user = req.body.params.answer.user) {
+                    if (item.user = req.body.params.answers.user) {
                         position = index;
                     }
                 })
                 if (position) {
-                    poll.answers[position] = req.body.params.answer;
+                    poll.answers[position] = req.body.params.answers;
                 } else {
-                    poll.answers.push(req.body.params.answer);
+                    poll.answers.push(req.body.params.answers);
                 }
             } else {
-                poll.answers = req.body.params.answer || null;
+                poll.answers = req.body.params.answers || null;
             }
         }
         poll.save(function (err) {
@@ -104,14 +106,30 @@ exports.updatePolls = function (req, res) {
 }
 
 exports.deletePoll = function (req, res) {
-    Poll.findByIdAndDelete({
-        _id: req.query._id
-    }, function (err) {
-        if (err)
-            res.send(err);
-        res.json({
-            status: "success",
-            message: 'Poll deleted'
+    Poll.findById(req.query._id, function (err, poll) {
+        var historic = new Historic();
+
+        historic.pollName = poll.pollName || null;
+        historic.groupPoll = poll.groupPoll || null;
+        historic.questions = poll.questions || null;
+        historic.owner = poll.owner || null;
+        historic.answers = poll.answers || null;
+        historic.openDate = poll.openDate || null;
+        historic.closeDate = new Date();
+
+        historic.save(function (err) {
+            if (err)
+                utils.errorController(res, 500, err);
+            Poll.findByIdAndDelete({
+                _id: req.query._id
+            }, function (err) {
+                if (err)
+                    res.send(err);
+                res.json({
+                    status: "success",
+                    message: 'Poll deleted'
+                });
+            });
         });
-    });
+    })
 }

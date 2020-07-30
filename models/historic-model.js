@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var PollSchema = new mongoose.Schema({
+var HistoricSchema = new mongoose.Schema({
     pollName: {
         type: String,
         unique: false,
@@ -38,10 +38,16 @@ var PollSchema = new mongoose.Schema({
         unique: false,
         required: true
     },
+    closeDate: {
+        type: Date,
+        unique: false,
+        required: true
+    }
+
 });
 
-var Poll = mongoose.model('Polls', PollSchema);
-module.exports = Poll;
+var Historic = mongoose.model('Historic', HistoricSchema);
+module.exports = Historic;
 module.exports.get = function (callback, limit) {
-    Poll.find(callback).limit(limit);
+    Historic.find(callback).limit(limit);
 }

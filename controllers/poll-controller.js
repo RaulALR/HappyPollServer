@@ -11,7 +11,7 @@ exports.savePoll = function (req, res) {
     poll.groupPoll = req.body.groupPoll || null;
     poll.questions = req.body.questions || null;
     poll.owner = req.body.owner || null;
-    poll.answers = null;
+    poll.answers = [];
     poll.openDate = new Date();
 
     poll.save(function (err) {
@@ -81,6 +81,7 @@ exports.updatePolls = function (req, res) {
         poll.questions = req.body.params.questions || null;
         if (req.body.params.answers) {
             if (poll.answers) {
+                let position = null;
                 poll.answers.forEach((item, index) => {
                     if (item.user = req.body.params.answers.user) {
                         position = index;

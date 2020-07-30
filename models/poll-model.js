@@ -21,18 +21,11 @@ var PollSchema = new mongoose.Schema({
         unique: false,
         required: true
     },
-    answers: new mongoose.Schema(({
-        user: {
-            type: String,
-            unique: true,
-            required: false
-        },
-        answersData: {
-            type: Array,
-            unique: false,
-            required: false
-        }
-    })),
+    answers: {
+        type: Array,
+        unique: false,
+        required: true
+    },
     openDate: {
         type: Date,
         unique: false,

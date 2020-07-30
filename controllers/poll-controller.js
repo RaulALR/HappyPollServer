@@ -11,6 +11,7 @@ exports.savePoll = function (req, res) {
     poll.groupPoll = req.body.groupPoll || null;
     poll.questions = req.body.questions || null;
     poll.owner = req.body.owner || null;
+    poll.answers = null;
     poll.openDate = new Date();
 
     poll.save(function (err) {
